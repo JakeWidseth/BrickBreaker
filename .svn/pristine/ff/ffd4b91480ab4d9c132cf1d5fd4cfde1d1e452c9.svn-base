@@ -1,0 +1,57 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package GameObjects;
+
+import Game.GamePanel;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Rectangle;
+
+/**
+ *
+ * @author cocor
+ */
+public class PowerUp extends MovingGameObject
+{
+    public char symbol;
+    
+    public PowerUp(int xPos, int yPos, char sym, Color c)
+    {
+        super(xPos, yPos, 0, 2, c);
+        symbol = sym;
+    }
+
+    @Override
+    public void draw(Graphics g)
+    {
+        g.setColor(color);
+        g.drawString(Character.toString(symbol), xPosition, xPosition);
+    }
+
+    @Override
+    public Rectangle getBounds()
+    {
+        Rectangle rect = new Rectangle(xPosition, yPosition, 3, 3);
+        return rect;
+    }
+
+    @Override
+    public void move()
+    {
+        super.move();
+    }
+    
+    public void onCollection(GamePanel game)
+    {
+        game.increaseLives(1);
+    }
+    
+    
+    
+    
+    
+    
+}

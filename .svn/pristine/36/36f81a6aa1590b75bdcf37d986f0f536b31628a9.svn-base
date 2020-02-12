@@ -1,0 +1,78 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Game;
+
+import GameObjects.Ball;
+import GameObjects.Brick;
+import GameObjects.GameObject;
+import GameObjects.Obstacle;
+import GameObjects.Paddle;
+import GameObjects.PowerUp;
+import com.sun.org.apache.bcel.internal.Repository;
+
+/**
+ *
+ * @author cocor
+ */
+public class GameLogic
+{
+    
+    public static void checkCollisions(Ball ball, Paddle paddle)
+    {
+        //checks collisions for balls with walls
+        if(ball.getBounds().x <= 0 || ball.getBounds().x + ball.getBounds().width >= 600)
+        {
+            ball.setXVelocity(-1 * ball.getXVelocity());
+        }
+        if(ball.getBounds().y <= 0)
+        {
+            ball.setYVelocity(-1 * ball.getYVelocity());
+        }
+        
+        //checks collisions for balls with paddles
+        if(ball.isColliding(paddle))
+        {   
+            int rate = ball.getPosition() - paddle.getPosition();
+            
+            ball.setYVelocity(-1 * ball.getYVelocity());
+            ball.setXVelocity(rate/4);
+        }
+    }
+
+    public static void polyCollision(Ball ball, GameObject object)
+    {
+        //use polymorphism to check all instances of bricks.
+        if(ball.isColliding(object))
+        {
+            //if it hits a brick, it bounces off and destroys it.
+            if(object instanceof Brick)
+            {
+                if(ball.getBounds().x < object.getBounds().x || ball.getBounds().x + ball.getBounds().width > object.getBounds().x + object.getBounds().width)
+                {
+                    ball.setXVelocity((-1 * ball.getXVelocity()));
+                }
+                else
+                {
+                    ball.setYVelocity(-1 * ball.getYVelocity());
+                }
+                ((Brick) object).setWidth(0);
+                ((Brick) object).setHeight(0);
+            }
+            
+            if(object instanceof Obstacle)
+            {
+                if(ball.getBounds().x < object.getBounds().x || ball.getBounds().x + ball.getBounds().width > object.getBounds().x + object.getBounds().width)
+                {
+                    ball.setXVelocity((-1 * ball.getXVelocity()));
+                }
+                else
+                {
+                    ball.setYVelocity(-1 * ball.getYVelocity());
+                }
+            }
+        }    
+    }
+}

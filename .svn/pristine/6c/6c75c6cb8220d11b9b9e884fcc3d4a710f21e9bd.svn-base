@@ -1,0 +1,77 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package GameObjects;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Rectangle;
+
+/**
+ *
+ * @author cocor
+ */
+public class Obstacle extends MovingGameObject
+{
+    public int width;
+    public int height;
+    public int speed;
+    
+    public Obstacle(int xPos, int yPos, int w, int h, Color c, int sp)
+    {
+        super(xPos, yPos, 2, 0, c);
+        width = w;
+        height = h;
+        speed = sp;
+    }
+    
+    public int getWidth()
+    {
+        return width;
+    }
+    
+    public int getHeight()
+    {
+        return height;
+    }
+    
+    public int getSpeed()
+    {
+        return speed;
+    }
+    
+    public void setSpeed(int i)
+    {
+        speed = i;
+    }
+
+    @Override
+    public void draw(Graphics g)
+    {
+        g.setColor(color);
+        g.fillRect(xPosition, yPosition, width, height);
+        g.setColor(Color.WHITE);
+        g.drawRect(xPosition, yPosition, width, height);
+    }
+
+    @Override
+    public void move()
+    {
+        xPosition += speed;
+    }
+
+    @Override
+    public Rectangle getBounds()
+    {
+        Rectangle rect = new Rectangle(xPosition, yPosition, width, height);
+        return rect;
+    }
+    
+    
+    
+    
+    
+    
+}

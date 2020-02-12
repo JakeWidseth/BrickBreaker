@@ -1,0 +1,96 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package GameObjects;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Rectangle;
+import java.util.Random;
+
+/**
+ *
+ * @author cocor
+ */
+public class Ball extends MovingGameObject
+{
+    public int diameter;
+    Random rand = new Random();
+    public int lives;
+    public int frameNumber = 0;
+    
+    public Ball(int xPos, int yPos, int d, Color c)
+    {
+        super(xPos, yPos, 0, -5, c);
+        diameter = d;
+        int xVel = rand.nextInt(8) - 4;
+        super.setXVelocity(xVel);
+    }
+    
+    public Ball(int xPos, int yPos, int d, Color c, int l)
+    {
+        super(xPos, yPos, 0, -5, c);
+        diameter = d;
+        int xVel = rand.nextInt(8) - 4;
+        super.setXVelocity(xVel);
+        lives = l;
+    }
+            
+    
+    public int getDiameter()
+    {
+        return diameter;
+    }
+    
+    public int getPosition()
+    {
+        int value = this.xPosition + (this.diameter/2);
+        return value;
+    }
+    
+    public void addLives(int l)
+    {
+        lives += l;
+    }
+    
+    public int getLives()
+    {
+        return lives;
+    }
+
+    @Override
+    public void draw(Graphics g)
+    {
+        g.setColor(color);
+        g.fillOval(xPosition, yPosition, diameter, diameter);
+        g.setColor(Color.WHITE);
+        g.drawOval(xPosition, yPosition, diameter, diameter);
+        
+    }
+
+    @Override
+    public void move()
+    {
+        super.move();
+    }
+
+    @Override
+    public Rectangle getBounds()
+    {
+        Rectangle bounds = new Rectangle(xPosition, yPosition, diameter, diameter);
+        return bounds;
+    }
+    
+    public int getFrame()
+    {
+        return frameNumber;
+    }
+    
+    public void addFrame()
+    {
+        frameNumber += 1;
+    }
+    
+}

@@ -1,0 +1,56 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package GameObjects;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Rectangle;
+
+/**
+ *
+ * @author cocor
+ */
+public class Obstacle extends MovingGameObject
+{
+    public int size;
+    
+    public Obstacle(int xPos, int yPos, int s, Color c)
+    {
+        super(xPos, yPos, 2, 0, c);
+        size = s;
+    }
+    
+    public int getSize()
+    {
+        return size;
+    }
+
+    @Override
+    public void draw(Graphics g)
+    {
+        g.setColor(color);
+        g.fillOval(xPosition, yPosition, size, size);
+    }
+
+    @Override
+    public void move()
+    {
+        super.move();
+    }
+
+    @Override
+    public Rectangle getBounds()
+    {
+        Rectangle rect = new Rectangle(xPosition, yPosition, size, size);
+        return rect;
+    }
+    
+    
+    
+    
+    
+    
+}

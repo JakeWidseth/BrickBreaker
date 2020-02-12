@@ -1,0 +1,38 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Game;
+
+import GameObjects.Ball;
+import GameObjects.Brick;
+import GameObjects.Obstacle;
+import GameObjects.Paddle;
+import GameObjects.PowerUp;
+
+/**
+ *
+ * @author cocor
+ */
+public class GameLogic
+{
+    public static void checkCollisions(Ball ball, Paddle paddle)
+    {
+        //checks collisions for balls with walls
+        if(ball.getBounds().x <= 0 || ball.getBounds().x + ball.getBounds().width >= 600)
+        {
+            ball.setXVelocity(-1 * ball.getXVelocity());
+        }
+        if(ball.getBounds().y <= 0)
+        {
+            ball.setYVelocity(-1 * ball.getYVelocity());
+        }
+        
+        //checks collisions for balls with paddles
+        if(ball.isColliding(paddle))
+        {
+            ball.setYVelocity(-1 * ball.getYVelocity());
+        }
+    }
+}
